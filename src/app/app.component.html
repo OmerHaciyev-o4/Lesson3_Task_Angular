@@ -1,0 +1,89 @@
+<div class="container-fluid">
+  <div class="row col-12">
+    <div class="col-5 me-3" style="border: 1px solid black;">
+      <label for="userName" class="mt-2 mb-2">Name</label>
+      <input
+        type="text"
+        name="userName"
+        id="userName"
+        class="w-100 mb-3"
+        [class]="inputChk(noRegisteredUser.name)"
+        placeholder="Enter name"
+        [(ngModel)]="noRegisteredUser.name"
+      />
+      <label for="surename" class="mt-2 mb-2">Surname</label>
+      <input
+        type="text"
+        name="surename"
+        id="surename"
+        class="w-100 mb-3"
+        [class]="inputChk(noRegisteredUser.lastname)"
+        placeholder="Enter surename"
+        [(ngModel)]="noRegisteredUser.lastname"
+      />
+      <label for="age" class="mt-2 mb-2">Age</label>
+      <input
+        type="number"
+        min="12"
+        max="65"
+        value="12"
+        name="age"
+        id="age"
+        class="w-100 mb-3"
+        [class]="{
+          'input-success':
+            noRegisteredUser.age >= 12 || noRegisteredUser.age <= 65,
+          'input-danger': noRegisteredUser.age > 65 || noRegisteredUser.age < 12
+        }"
+        placeholder="Enter age"
+        [(ngModel)]="noRegisteredUser.age"
+      />
+      <label for="hireDate" class="mt-2 mb-2">Hire date</label>
+      <input
+        type="date"
+        name="hireDate"
+        id="hireDate"
+        class="w-100 mb-3"
+        [class]="{
+          'input-success': checkHireDate(),
+          'input-danger': !checkHireDate()
+        }"
+        placeholder="Enter hire date"
+        [(ngModel)]="noRegisteredUser.hireDate"
+      />
+
+      <button
+        class="btn btn-success w-50 rounded mx-auto d-block mb-2"
+        [class]="checkBtn()"
+        (click)="register()"
+      >
+        Register
+      </button>
+    </div>
+    <div class="col-6 p-0" style="border: 1px solid black; overflow-y: scroll;">
+      <table class="table table-bordered w-100 m-0">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Lastname</th>
+            <th>Age</th>
+            <th>Hire date</th>
+          </tr>
+        </thead>
+        <tbody #tbody>
+          <tr
+            #tr
+            style="cursor: pointer"
+            (click)="ChangeColor(tbody, tr.style)"
+            *ngFor="let user of getUsers(); let i = index"
+          >
+            <td>{{ user.name }}</td>
+            <td>{{ user.lastname }}</td>
+            <td>{{ user.age }}</td>
+            <td>{{ user.hireDate }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
