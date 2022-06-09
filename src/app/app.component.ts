@@ -15,7 +15,8 @@ export class AppComponent {
     this.model = new UserModel();
     this.noRegisteredUser = new User();
 
-    this.model.users = JSON.parse(localStorage.getItem('users'));
+    var users = JSON.parse(localStorage.getItem('users'));
+    if (users != null) this.model.users = users;
   }
 
   checkBtn() {
@@ -54,6 +55,7 @@ export class AppComponent {
     newUser.age = this.noRegisteredUser.age;
     newUser.hireDate = this.noRegisteredUser.hireDate;
 
+    console.log(this.model.users);
     this.model.users.push(newUser);
     this.saveToDB();
     this.noRegisteredUser = new User();

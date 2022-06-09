@@ -1,7 +1,7 @@
 import { User } from './user';
 
 export class UserModel {
-  users: User[];
+  users: Array<User>;
 
   constructor() {
     this.users = new Array<User>();
